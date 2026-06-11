@@ -9,16 +9,21 @@ CREATE TABLE users (
 );
 
 CREATE TABLE movies (
-    movie_id     SERIAL       PRIMARY KEY,
-    ml_movie_id  INT          NOT NULL UNIQUE,
-    title        VARCHAR(500) NOT NULL,
-    release_year INT,
-    genres       VARCHAR(300) NOT NULL DEFAULT '',
-    click_count  INT          DEFAULT 0,
-    avg_rating   FLOAT        DEFAULT 0.0,
-    search_text  TEXT,
-    embedding    vector(384),
-    created_at   TIMESTAMP    DEFAULT NOW()
+    movie_id      SERIAL        PRIMARY KEY,
+    ml_movie_id   INT           NOT NULL UNIQUE,
+    title         VARCHAR(500)  NOT NULL,
+    title_ko      VARCHAR(500),
+    overview      TEXT,
+    poster_path   VARCHAR(500),
+    vote_average  FLOAT         DEFAULT 0.0,
+    release_year  INT,
+    tmdb_id       INT,
+    genres        VARCHAR(300)  NOT NULL DEFAULT '',
+    click_count   INT           DEFAULT 0,
+    avg_rating    FLOAT         DEFAULT 0.0,
+    search_text   TEXT,
+    embedding     vector(384),
+    created_at    TIMESTAMP     DEFAULT NOW()
 );
 
 CREATE INDEX idx_movies_fulltext
