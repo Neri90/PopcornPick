@@ -18,10 +18,7 @@ class LogRequest(BaseModel):
     action_type: str
     rating_value: Optional[int] = None
 
-@router.post("/logs")
-def create_log(playload : LogRequest):
-    save_log(playload)
-
-    return {
-        "status": "success"
-    }
+@router.post("")
+async def create_log(payload: LogRequest):
+    save_log(payload)
+    return {"status": "success"}
