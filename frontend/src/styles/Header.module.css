@@ -1,0 +1,51 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(11, 13, 16, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    letter-spacing: -0.5px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.username {
+    color: #a0aec0;
+    font-size: 0.9rem;
+}
+
+.loginBtn,
+.logoutBtn {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.logoutBtn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #a0aec0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}

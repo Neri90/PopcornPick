@@ -1,0 +1,100 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0b0d10;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 40px;
+    width: 400px;
+    max-width: 90vw;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin: 0 0 4px 0;
+}
+
+.subtitle {
+    color: #a0aec0;
+    text-align: center;
+    font-size: 0.9rem;
+    margin: 0 0 28px 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field label {
+    color: #a0aec0;
+    font-size: 0.85rem;
+}
+
+.field input {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.field input:focus {
+    border-color: rgba(230, 126, 34, 0.5);
+}
+
+.error {
+    color: #fc8181;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.btn {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.link {
+    text-align: center;
+    color: #a0aec0;
+    font-size: 0.88rem;
+    margin-top: 20px;
+}
+
+.link a {
+    color: #e67e22;
+    text-decoration: none;
+    font-weight: 600;
+}

@@ -1,0 +1,156 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal {
+    background: #1a1d23;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    width: 700px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 32px;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #a0aec0;
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.closeBtn:hover { color: #f7fafc; }
+
+.content {
+    display: flex;
+    gap: 24px;
+}
+
+.left {
+    flex-shrink: 0;
+}
+
+.poster {
+    width: 180px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.noPoster {
+    width: 180px;
+    height: 270px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #718096;
+}
+
+.right {
+    flex: 1;
+}
+
+.titleKo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f7fafc;
+    margin: 0 0 4px 0;
+}
+
+.title {
+    font-size: 0.9rem;
+    color: #a0aec0;
+    margin: 0 0 12px 0;
+}
+
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.genreBadge {
+    background: rgba(230, 126, 34, 0.15);
+    color: #e67e22;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.voteAverage {
+    color: #f6c90e;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+.ratingSection {
+    margin-bottom: 16px;
+}
+
+.ratingLabel {
+    color: #a0aec0;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+}
+
+.star {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: color 0.15s;
+}
+
+.star:hover,
+.star.active {
+    color: #f6c90e;
+}
+
+.message {
+    color: #68d391;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.likeBtn {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.likeBtn:hover:not(:disabled) { filter: brightness(1.1); }
+.likeBtn.liked { background: #4a5568; cursor: default; }
