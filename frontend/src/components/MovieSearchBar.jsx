@@ -20,7 +20,7 @@ const MovieSearchBar = ({ onMovieClick }) => {
     return (
         <section className={styles.section}>
             <h2 className={styles.title}>영화 검색</h2>
-            <p className={styles.desc}>키워드 검색과 의미론적 벡터 검색을 결합해 최적의 영화를 찾아드립니다.</p>
+            <p className={styles.desc}>최적의 영화를 찾아드립니다.</p>
 
             <form className={styles.form} onSubmit={handleSearch}>
                 <input

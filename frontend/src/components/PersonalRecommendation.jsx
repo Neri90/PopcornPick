@@ -13,7 +13,7 @@ const PersonalRecommendation = ({ userId, onMovieClick }) => {
                     <p className={styles.desc}>
                         {isFallback
                             ? '아직 추천 데이터가 없어 인기 영화를 보여드립니다. 평점을 매기면 개인 맞춤으로 전환됩니다.'
-                            : 'ALS 배치 알고리즘으로 계산된 개인화 추천 목록입니다.'}
+                            : '개인화 추천 영화입니다.'}
                     </p>
                 </div>
                 <button className={styles.refreshBtn} onClick={refetch}>새로고침</button>
