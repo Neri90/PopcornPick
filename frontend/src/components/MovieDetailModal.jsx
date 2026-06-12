@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import apiClient from '../api/apiClient'
 import useAuthStore from '../store/authStore'
 import styles from '../styles/MovieDetailModal.module.css'
 
-const MovieDetailModal = ({ movie, onClose }) => {
-    const { user } = useAuthStore()
+const MovieDetailModal = ({movie, onClose}) => {
+    const {user} = useAuthStore()
     const [rating, setRating] = useState(0)
     const [liked, setLiked] = useState(false)
     const [message, setMessage] = useState('')
@@ -13,13 +13,12 @@ const MovieDetailModal = ({ movie, onClose }) => {
 
     const sendLog = async (action_type, rating_value = null) => {
         try {
-            const endpoint = action_type === 'LIKE' ? '/logs/like'
-                           : action_type === 'RATING' ? '/logs/rating'
-                           : '/logs/click'
-            await apiClient.post(endpoint, {
-                user_id: user.user_id,
+            const userId = user?.user_id ?? 1
+            await apiClient.post('/logs', {
+                user_id: userId,
                 movie_id: movie.movie_id,
                 genres: movie.genres,
+                action_type: action_type,
                 rating_value,
             })
         } catch (err) {
@@ -47,7 +46,7 @@ const MovieDetailModal = ({ movie, onClose }) => {
                 <div className={styles.content}>
                     <div className={styles.left}>
                         {movie.poster_path ? (
-                            <img src={movie.poster_path} alt={movie.title} className={styles.poster} />
+                            <img src={movie.poster_path} alt={movie.title} className={styles.poster}/>
                         ) : (
                             <div className={styles.noPoster}>No Image</div>
                         )}
