@@ -1,9 +1,11 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 from db import engine
 from contextlib import asynccontextmanager
 from batch_recommendation.api.recommendation_router import router as recommendation_router
 from realtime_log.api.log_router import router as log_router
+from popular_movie.api.popular_movie_router import router as popular_movie_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -17,8 +19,17 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="PopcornPick API", lifespan=lifespan)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(recommendation_router, prefix="/recommendations", tags=["recommendations"])
 app.include_router(log_router, prefix="/logs", tags=["logs"])
+app.include_router(popular_movie_router, prefix="/movies", tags=["movies"])
 
 @app.get("/health")
 def health():
