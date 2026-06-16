@@ -17,6 +17,16 @@ def login(payload: UserLoginRequest):
     """
     사용자 로그인 API 엔드포인트입니다.
     """
-    # TODO: auth_service.authenticate_user 함수를 호출하여 로그인을 검증하고 결과를 반환하세요.
-    result = auth_service.authenticate_user(payload.email, payload.password)
-    return LoginResponse(success=result, message="로그인 성공")
+    user = auth_service.authenticate_user(payload.email, payload.password)
+    
+    # JWT 토큰 생성
+    token_data = {"sub": str(user["user_id"]), "email": user["email"]}
+    access_token = auth_service.create_access_token(token_data)
+    
+    return LoginResponse(
+        success=True,
+        message="로그인 성공",
+        access_token=access_token,
+        user_id=user["user_id"],
+        username=user["username"]
+    )

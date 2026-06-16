@@ -32,3 +32,6 @@ class LoginResponse(BaseModel):
     """
     success: bool
     message: str
+    access_token: Optional[str] = None
+    user_id: Optional[int] = None
+    username: Optional[str] = None

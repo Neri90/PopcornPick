@@ -2,6 +2,23 @@ from typing import Optional
 from auth.repository.user_repo import create_user, get_user_by_email
 import bcrypt
 from fastapi import HTTPException
+import jwt
+import os
+from datetime import datetime, timedelta
+
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "popcornpick_secret_key_change_in_production")
+JWT_ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
+
+def create_access_token(data: dict) -> str:
+    """
+    Access Token (JWT)을 생성합니다.
+    """
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
+    return encoded_jwt
 
 def hash_password(password: str) -> str:
     """
@@ -40,14 +57,13 @@ def register_user(username: str, email: str, password_raw: str) -> dict:
         "created_at": row[3]
     }
 
-def authenticate_user(email: str, password_raw: str) -> bool:
+def authenticate_user(email: str, password_raw: str) -> dict:
     """
     로그인(인증)의 비즈니스 논리를 처리합니다.
     1. 이메일로 사용자 조회
     2. 비밀번호 불일치 시 HTTP 401 Unauthorized 에러 발생
-    3. 성공 시 로그인 성공 여부(True) 반환
+    3. 성공 시 사용자 정보 딕셔너리 반환
     """
-    # TODO: 로그인 검증 성공 시 True를 반환하세요.
     # 1
     user = get_user_by_email(email)
     if not user:
@@ -57,4 +73,8 @@ def authenticate_user(email: str, password_raw: str) -> bool:
     if not is_valid:
         raise HTTPException(status_code=401, detail="비밀번호가 일치하지 않습니다.")
     # 3
-    return True
+    return {
+        "user_id": user[0],
+        "username": user[1],
+        "email": user[2]
+    }

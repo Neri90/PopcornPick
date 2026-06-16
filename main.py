@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 from batch_recommendation.api.recommendation_router import router as recommendation_router
 from realtime_log.api.log_router import router as log_router
 from popular_movie.api.popular_movie_router import router as popular_movie_router
+from movie_search.api.search_router import router as search_router
 from auth.api.auth_router import router as auth_router
 
 @asynccontextmanager
@@ -32,6 +33,7 @@ app.include_router(auth_router, prefix="/auth", tags=["auth"])
 app.include_router(recommendation_router, prefix="/recommendations", tags=["recommendations"])
 app.include_router(log_router, prefix="/logs", tags=["logs"])
 app.include_router(popular_movie_router, prefix="/movies", tags=["movies"])
+app.include_router(search_router, prefix="/search", tags=["search"])
 
 @app.get("/health")
 def health():
