@@ -7,3 +7,4 @@ pyjwt==2.8.0
 sentence-transformers==2.7.0
 pandas
 requests==2.32.2
+bcrypt==5.0.0
