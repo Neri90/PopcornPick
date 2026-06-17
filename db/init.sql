@@ -32,9 +32,9 @@ CREATE INDEX idx_movies_click
     ON movies (click_count DESC);
 CREATE INDEX idx_movies_rating
     ON movies (avg_rating DESC);
--- CREATE INDEX idx_movies_embedding
---     ON movies USING ivfflat (embedding vector_cosine_ops)
---     WITH (lists = 100);
+CREATE INDEX idx_movies_embedding
+    ON movies USING ivfflat (embedding vector_cosine_ops)
+    WITH (lists = 100);
 
 CREATE TABLE ratings (
     rating_id BIGSERIAL PRIMARY KEY,
