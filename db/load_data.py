@@ -127,6 +127,18 @@ def update_avg_rating(conn):
     print("avg_rating 갱신 완료")
     cur.close()
 
+def create_vector_index(conn):
+    print("\nivfflat 인덱스 생성 중...")
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE INDEX IF NOT EXISTS idx_movies_embedding
+            ON movies USING ivfflat (embedding vector_cosine_ops)
+            WITH (lists = 100)
+    """)
+    conn.commit()
+    print("인덱스 생성 완료")
+    cur.close()
+
 if __name__ == "__main__":
     conn = get_conn()
     try:
@@ -134,6 +146,7 @@ if __name__ == "__main__":
         load_users(conn)
         load_ratings(conn)
         update_avg_rating(conn)
+        create_vector_index(conn)
         print("\n전체 완료")
     except Exception as e:
         conn.rollback()
