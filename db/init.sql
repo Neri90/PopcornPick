@@ -8,6 +8,8 @@ CREATE TABLE users (
     created_at TIMESTAMP    DEFAULT NOW()
 );
 
+CREATE INDEX idx_users_email ON users (email);
+
 CREATE TABLE movies (
     movie_id      SERIAL        PRIMARY KEY,
     ml_movie_id   INT           NOT NULL UNIQUE,
