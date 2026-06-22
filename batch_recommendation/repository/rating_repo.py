@@ -44,3 +44,33 @@ def upsert_rating(user_id: int, movie_id: int, rating: float):
     finally:
         cur.close()
         conn.close()
+
+
+def fetch_user_rating(user_id: int, movie_id: int):
+    conn = get_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT rating FROM ratings
+            WHERE user_id = %s AND movie_id = %s
+        """, (user_id, movie_id))
+        row = cur.fetchone()
+        return row[0] if row else None
+    finally:
+        cur.close()
+        conn.close()
+
+def fetch_user_liked(user_id: int, movie_id: int):
+    conn = get_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT 1 FROM user_click_logs
+            WHERE user_id = %s AND movie_id = %s
+            AND action_type = 'LIKE'
+            LIMIT 1
+        """, (user_id, movie_id))
+        return cur.fetchone() is not None
+    finally:
+        cur.close()
+        conn.close()
