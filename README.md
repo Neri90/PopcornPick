@@ -272,9 +272,9 @@ DB 이미지 넣는다
 - 문제: local / Standalone / YARN 등 실행 모드 파악에 초기 시간 소요. Docker 컨테이너 내부에서 local[2] 실행 시 driver.memory 설정만으로 OOM을 제어할 수 없었음.
 - 해결: local[2] 모드로 확정 후, 컨테이너 메모리 한계와 spark.driver.memory / spark.sql.shuffle.partitions를 함께 튜닝하여 안정화.
 
-### 팀원 B — 실시간 로그 & Streaming
-
-> 작성 예정
+### 임충은 — 실시간 로그 & Streaming
+- 문제: rating 수정 이벤트 발생 시 기존 별점 가중치가 제거되지 않아 동일 영화에 대한 가중치가 중복 누적되는 문제 발생
+- 해결: spark window를 활용해 해당 사용자의 이전 별점로그를 조회하고, (새 별점 - 이전 별점) 차이값 기반으로 가중치 계산하여 누적 오차 방지
 
 ### 팀원 C — 하이브리드 검색
 
