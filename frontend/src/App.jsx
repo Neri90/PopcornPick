@@ -4,6 +4,7 @@ import useAuthStore from './store/authStore'
 import Header from './components/Header'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import ProfilePage from './pages/ProfilePage'
 import HomePage from './pages/HomePage'
 import styles from './styles/App.module.css'
 
@@ -25,6 +26,7 @@ const App = () => {
                 <Header />
                 <Routes>
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>}/>
                     <Route path="/register" element={<RegisterPage />} />
                     <Route
                         path="/"
