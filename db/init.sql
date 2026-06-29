@@ -105,3 +105,11 @@ CREATE TABLE chat_histories (
 
 CREATE INDEX idx_chat_session ON chat_histories (session_id, created_at DESC);
 CREATE INDEX idx_chat_user    ON chat_histories (user_id, created_at DESC);
+
+create table refresh_tokens(
+    user_id int not null references users(user_id),
+    token_id serial primary key,
+    token varchar(255) not null unique,
+    expires_at timestamp default now() + interval '7 days',
+    created_at timestamp default now()
+);

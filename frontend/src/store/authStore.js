@@ -1,16 +1,21 @@
 import { create } from 'zustand'
 
-const useAuthStore = create((set) => ({
-    user: null,
-    isLoggedIn: false,
+const savedToken = localStorage.getItem('access_token')
+const savedUser = JSON.parse(localStorage.getItem('user') || 'null')
 
-    login: (userData, token) => {
+const useAuthStore = create((set) => ({
+    user: savedToken && savedUser ? savedUser : null,
+    isLoggedIn: !!(savedToken && savedUser),
+
+    login: (userData, token, refresh_token) => {
         localStorage.setItem('access_token', token)
+        localStorage.setItem('refresh_token', refresh_token)
         set({ user: userData, isLoggedIn: true })
     },
 
     logout: () => {
         localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
         set({ user: null, isLoggedIn: false })
     },
 

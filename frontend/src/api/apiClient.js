@@ -17,10 +17,19 @@ apiClient.interceptors.request.use((config) => {
 
 apiClient.interceptors.response.use(
     (response) => response,
-    (error) => {
-        if (error.response?.status === 401) {
-            localStorage.removeItem('access_token')
-            window.location.href = '/login'
+    async (error) => {
+        const originalRequest = error.config
+        const isAuthRequest =
+            originalRequest.url.includes('/auth/login') ||
+            originalRequest.url.includes('/auth/refresh')
+
+        if (error.response?.status === 401 && !isAuthRequest) {
+            const refresh_token = localStorage.getItem('refresh_token')
+            if (!refresh_token) return Promise.reject(error)
+            const res = await apiClient.post('/auth/refresh', { refresh_token })
+            localStorage.setItem('access_token', res.data.access_token)
+            originalRequest.headers.Authorization = `Bearer ${res.data.access_token}`
+            return apiClient(originalRequest)
         }
         return Promise.reject(error)
     }

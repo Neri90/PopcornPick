@@ -18,12 +18,13 @@ const LoginPage = () => {
         setLoading(true)
         try {
             const res = await apiClient.post('/auth/login', { email, password })
-            const { access_token, user_id, username } = res.data
-            login({ user_id, username, email }, access_token)
+            const { access_token, user_id, username, refresh_token } = res.data
+            login({ user_id, username, email }, access_token, refresh_token)
             localStorage.setItem('user', JSON.stringify({ user_id, username, email }))
             navigate('/')
         } catch (err) {
-            setError(err.response?.data?.detail || '로그인에 실패했습니다.')
+            const detail = err.response?.data?.detail
+            setError(Array.isArray(detail) ? detail[0]?.msg : (typeof detail === 'string' ? detail : '로그인에 실패했습니다.'))
         } finally {
             setLoading(false)
         }
